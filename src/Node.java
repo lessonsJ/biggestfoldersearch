@@ -42,12 +42,15 @@ public class Node
 
     public String toString()
     {
+        long sizeLimit = 50 * 1024;
         StringBuilder builder = new StringBuilder();
         String size = SizeCalculator.getHumanReadableSize(getSize());
         builder.append(folder.getName() + " — " + size + "\n");
-        for(Node child : children) {
-
-            builder.append("  ".repeat(this.level) + child.toString());
+        for(Node child : children){
+            //System.out.println(child.getSize());
+            if (child.getSize() > sizeLimit) {
+                builder.append("  ".repeat(this.level) + child.toString());
+            }
         }
         return builder.toString();
     }
